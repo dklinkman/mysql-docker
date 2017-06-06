@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mysqld_safe &
+
+sleep 5
+
+mysql -u root <<END
+
+create user 'root'@'127.0.0.1' identified by '';
+create user 'root'@'%' identified by '';
+
+GRANT ALL ON *.* TO 'root'@'127.0.0.1' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+flush privileges;
+
+END
